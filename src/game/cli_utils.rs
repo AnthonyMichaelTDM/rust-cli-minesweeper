@@ -32,7 +32,7 @@ fn print_header(n_mines:usize, n_flags:usize, board_size:u8) {
 
 {flagText:^width$}",
     title = "MINESWEEPER" as &str,
-    flagText = format!("{}: {:0>3}",FLAG,n_mines-n_flags),
+    flagText = format!("{}: {:0>3}",FLAG,n_mines as isize-n_flags as isize),
     );
 }
 /// prints board

@@ -208,6 +208,12 @@ impl Field {
     }
     /// get field dimensions from difficulty
     pub fn get_dimensions(&self) -> u8 {self.difficulty.get_dimensions()}
+
+    //incrementers and decrementers
+    ///increments n_flags
+    pub fn increment_n_flags(&mut self) {self.n_flags += 1}
+    ///decrements n_flags
+    pub fn decrement_n_flags(&mut self) {self.n_flags -= 1}
 }
 
 /// a single square on a grid
