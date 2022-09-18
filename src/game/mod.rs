@@ -19,6 +19,7 @@ pub fn run(config: &mut Config) -> Result<(), Box<dyn Error>> {
         let command;
 
         // print board state
+        cli_utils::reset_screen();
         cli_utils::print_game_state(&config.field);
         
         // allow user to add a flag, or check the state of a square
