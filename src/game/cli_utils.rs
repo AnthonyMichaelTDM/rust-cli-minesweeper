@@ -18,28 +18,29 @@ pub fn reset_screen() {
 /// prints the board state to screen
 pub fn print_game_state(field: &Field) {
     //print header
-    print_header(field.get_n_mines(), field.get_dimensions());
+    print_header(field.get_n_mines(), field.get_n_flags(), field.get_dimensions());
     //print board
     print_board(field);
     //print instrustions for inputting commands
     print_command_instructions();
 }
 /// prints header of board state
-fn print_header(n_mines:usize, board_size:u8) {
-    let width = board_size as usize + 3;
+fn print_header(n_mines:usize, n_flags:usize, board_size:u8) {
+    let width = board_size as usize + 6;
     println!(
 "{title:^width$}
 
 {flagText:^width$}",
     title = "MINESWEEPER" as &str,
-    flagText = format!("{}: {:0>3}",FLAG,n_mines),
+    flagText = format!("{}: {:0>3}",FLAG,n_mines-n_flags),
     );
 }
 /// prints board
 pub fn print_board(field: &Field) {
     println!(
-"  #{column_letters}
-{grid}",
+"  #{column_letters}#  
+{grid}
+  #{column_letters}#  ",
         column_letters = (0u8..field.get_dimensions()).fold(String::new(), |mut acc, i| {acc.push((i+97) as char); acc}),
         grid = field.get_grid().iter().enumerate().fold(String::new(), //fold contents of grid into a single string
             |mut acc, row_tup| { //for every row
@@ -50,8 +51,7 @@ pub fn print_board(field: &Field) {
                 //add the row number, and contents to acc
                 acc.push_str(
                     format!(
-                        "{:<2}#{}",
-                        num, //line numbers
+                        "{num:<2}#{}#{num:>2}",
                         row.iter().fold(String::new(), |mut nested_acc, square| {
                             nested_acc.push(square.get_icon());
                             return nested_acc;

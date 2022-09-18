@@ -18,6 +18,7 @@ pub struct Field {
     difficulty: Difficulty,
     mines: Vec<(u8,u8)>,
     n_mines:usize,
+    n_flags:usize,
 }
 impl Field {
     /// creates new empty field
@@ -27,6 +28,7 @@ impl Field {
             difficulty: Difficulty::BEGINNER, //default value, changed in populate
             mines: Vec::new(),
             n_mines: 0,
+            n_flags: 0,
         };
 
         return field
@@ -178,6 +180,8 @@ impl Field {
     pub fn get_grid(&self) -> &Vec<Vec<Square>> {&self.grid}
     /// get n_mines
     pub fn get_n_mines(&self) -> usize {self.n_mines}
+    /// get n_flags
+    pub fn get_n_flags(&self) -> usize {self.n_flags}
     /// get mines
     pub fn get_mines(&self) -> &Vec<(u8,u8)> {&self.mines}
     /// get a reference to the square at the given x and y coordinate
