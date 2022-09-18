@@ -119,9 +119,9 @@ pub fn run(config: &mut Config) -> Result<(), Box<dyn Error>> {
 
                         //make all squares bordering each square in curr_queue visible, and add all that have 0 danger to backlog
                         for (x_pos,y_pos) in curr_queue.iter() {
-                            cli_utils::reset_screen();
+                            //cli_utils::reset_screen();
                             backlog.extend(config.field.check_and_update_states_of_adjacent_squares(*x_pos, *y_pos).iter());
-                            cli_utils::print_game_state(&config.field);
+                            //cli_utils::print_game_state(&config.field);
                         }
 
                         //if queue is empty, exit
