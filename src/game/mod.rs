@@ -137,7 +137,7 @@ pub fn run(config: &mut Config) -> Result<(), Box<dyn Error>> {
         //specifically, this checks all the mines and if any are hidden (not flagged) it will continue (i.e. not end the game)
         for (x_pos,y_pos) in mines.iter() {
             if let Some(square) = config.field.get_square_at_mut(*x_pos as isize, *y_pos as isize) {
-                if field::State::HIDDEN.eq(square.get_state()) {
+                if !field::State::FLAGGED.eq(square.get_state()) {
                     game_over = false;
                     break;
                 }
