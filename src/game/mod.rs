@@ -73,7 +73,7 @@ pub fn run(config: &mut Config) -> Result<(), Box<dyn Error>> {
             //what prefix is being used?
             if command.0 == 'f' { //toggle flag
                 if field::State::FLAGGED.eq(square.get_state()) {
-                    if square.get_danger() == 0 && !square.is_mine {
+                    if square.get_danger() == 0 && !square.is_mine() {
                         square.set_state(field::State::VISIBLE);
                     }
                     else {
