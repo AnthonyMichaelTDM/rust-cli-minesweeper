@@ -115,7 +115,7 @@ impl Field {
         }
     }
 
-    //makes all the mines visible
+    ///makes all the mines visible
     pub fn show_mines(&mut self) {
         let mines = self.mines.clone();
         for (x_pos,y_pos) in mines.iter() {
@@ -127,7 +127,21 @@ impl Field {
         }
     }
 
+    ///makes the whole field visible
+    pub fn show_field(&mut self) {
+        for row in self.grid.iter_mut() {
+            for square in row.iter_mut() {
+                if State::HIDDEN.eq(square.get_state()) {
+                    square.set_state(State::VISIBLE);
+                }
+            }
+        }
+    }
 
+
+    ///(used in a loop iterating over backlog) gets the square at the given position 
+    ///and checks all squares adjacent to it, making them visible and adding them 
+    ///to the backlog if their danger is 0 (they aren't bordering a mine)
     pub fn check_and_update_states_of_adjacent_squares(&mut self, x_pos:isize,y_pos:isize) -> Vec<(isize,isize)> {
         let mut backlog:Vec<(isize,isize)> = Vec::new();
 

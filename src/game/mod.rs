@@ -73,12 +73,7 @@ pub fn run(config: &mut Config) -> Result<(), Box<dyn Error>> {
             //what prefix is being used?
             if command.0 == 'f' { //toggle flag
                 if field::State::FLAGGED.eq(square.get_state()) {
-                    if square.get_danger() == 0 && !square.is_mine() {
-                        square.set_state(field::State::VISIBLE);
-                    }
-                    else {
-                        square.set_state(field::State::HIDDEN);
-                    }
+                    square.set_state(field::State::HIDDEN); 
                     config.field.decrement_n_flags();
                 }
                 else {
@@ -145,8 +140,8 @@ pub fn run(config: &mut Config) -> Result<(), Box<dyn Error>> {
         }
         if game_over {
             println!("You win, congradulations!");
-            // go through every mine and make it visible
-            config.field.show_mines();
+            // make the whole field visible
+            config.field.show_field();
             cli_utils::print_board(&config.field);
             break;
         }
