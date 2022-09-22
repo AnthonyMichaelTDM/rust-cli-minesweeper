@@ -1,13 +1,11 @@
 use std::{error::Error, collections::HashSet};
 
-use self::config::Config;
-
 mod cli_utils;
 pub mod config;
 mod field;
 
 /// run the program
-pub fn run(config: &mut Config) -> Result<(), Box<dyn Error>> {
+pub fn run(config: &mut config::Config) -> Result<(), Box<dyn Error>> {
     //DATA
     let column_letter_range = (0u8..config.field.get_dimensions()).fold(String::new(), |mut acc, i| {acc.push((i+97) as char); acc});
     let row_number_range = 0..(config.field.get_dimensions() as usize);
